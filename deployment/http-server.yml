@@ -1,0 +1,98 @@
+---
+# SPDX-license-identifier: Apache-2.0
+##############################################################################
+# Copyright (c) 2022
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Apache License, Version 2.0
+# which accompanies this distribution, and is available at
+# http://www.apache.org/licenses/LICENSE-2.0
+##############################################################################
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wasm-server
+  labels:
+    app: wasm-frontend
+spec:
+  selector:
+    matchLabels:
+      app: wasm-frontend
+  template:
+    metadata:
+      labels:
+        app: wasm-frontend
+      annotations:
+        module.wasm.image/variant: compat
+    spec:
+      runtimeClassName: crun
+      containers:
+        - name: http-server
+          image: avengermojo/http_server:with-wasm-annotation
+          command: ["/http_server.wasm"]
+          ports:
+            - containerPort: 1234
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: 1234
+            initialDelaySeconds: 3
+            periodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wasm-service
+  labels:
+    app: wasm-frontend
+spec:
+  type: ClusterIP
+  ports:
+    - port: 1234
+      targetPort: 1234
+      name: web
+  selector:
+    app: wasm-frontend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rust-server
+  labels:
+    app: rust-frontend
+spec:
+  selector:
+    matchLabels:
+      app: rust-frontend
+  template:
+    metadata:
+      labels:
+        app: rust-frontend
+    spec:
+      runtimeClassName: crun
+      containers:
+        - name: http-server
+          image: rust/hello-world:0.0.1
+          ports:
+            - containerPort: 1234
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: 1234
+            initialDelaySeconds: 3
+            periodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rust-service
+  labels:
+    app: rust-frontend
+spec:
+  type: ClusterIP
+  ports:
+    - port: 1234
+      targetPort: 1234
+      name: web
+  selector:
+    app: rust-frontend

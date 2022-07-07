@@ -1,0 +1,27 @@
+---
+# SPDX-license-identifier: Apache-2.0
+##############################################################################
+# Copyright (c) 2022
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Apache License, Version 2.0
+# which accompanies this distribution, and is available at
+# http://www.apache.org/licenses/LICENSE-2.0
+##############################################################################
+
+name: Check Demos
+# yamllint disable-line rule:truthy
+on:
+  push:
+
+jobs:
+  check-containerd:
+    name: Check demo for Containerd runtime on Ubuntu Virtual Environment
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: deployment/install.sh
+      - name: Configure environment
+        run: cd deployment/; ./configure.sh
+      - name: Running demo
+        run: cd deployment/; ./demo.sh

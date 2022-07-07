@@ -1,0 +1,8 @@
+[package]
+name = "http-server"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+httpcodec = "0.2.3"
+bytecodec = "0.4.15"
