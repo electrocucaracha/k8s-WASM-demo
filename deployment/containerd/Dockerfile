@@ -1,24 +1,38 @@
 ARG version
 
-FROM kindest/node:v${version} as builder
+FROM ubuntu:22.04 as builder
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN DEBIAN_FRONTEND=noninteractive clean-install \
-    make=4.3-4ubuntu1 \
-    git=1:2.32.0-1ubuntu1.2 \
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+    apt-get install -y --no-install-recommends \
+    ca-certificates=20211016 \
+    curl=7.81.0-1ubuntu1.3 \
+    make=4.3-4.1build1 \
+    git=1:2.34.1-1ubuntu1.4 \
     gcc=4:11.2.0-1ubuntu1 \
-    build-essential=12.9ubuntu2 \
-    pkgconf=1.7.4~git20210206+dcf529b-3 \
-    libtool=2.4.6-15 \
-    libsystemd-dev=248.3-1ubuntu8.6 \
-    libprotobuf-c-dev=1.3.3-1build2 \
-    libcap-dev=1:2.44-1build1 \
-    libseccomp-dev=2.5.1-1ubuntu1 \
-    libyajl-dev=2.1.0-3 \
-    go-md2man=2.0.0+ds-5 \
-    autoconf=2.69-14 \
-    python3=3.9.4-1build1 \
-    automake=1:1.16.4-2
+    build-essential=12.9ubuntu3 \
+    pkgconf=1.8.0-1 \
+    libtool=2.4.6-15build2 \
+    libsystemd-dev=249.11-0ubuntu3.4 \
+    libprotobuf-c-dev=1.3.3-1ubuntu2.1 \
+    libcap-dev=1:2.44-1build3 \
+    libseccomp-dev=2.5.3-2ubuntu2 \
+    libyajl-dev=2.1.0-3build2 \
+    go-md2man=2.0.1+ds1-1 \
+    autoconf=2.71-2 \
+    python3=3.10.4-0ubuntu2 \
+    automake=1:1.16.5-1.3 && \
+    apt-get clean -y && \
+    rm -rf \
+    /var/cache/debconf/* \
+    /var/lib/apt/lists/* \
+    /var/log/* \
+    /tmp/* \
+    /var/tmp/* \
+    /usr/share/doc/* \
+    /usr/share/doc-base/* \
+    /usr/share/man/* \
+    /usr/share/local/*
 
 # install wasmedge headers (https://wasmedge.org/book/en/start/install.html#install-for-all-users)
     # NOTE: WasmEdge C API breaking changes (https://github.com/WasmEdge/WasmEdge/blob/master/docs/book/en/src/embed/c/0.9.1/upgrade_to_0.10.0.md)
