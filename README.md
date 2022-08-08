@@ -5,13 +5,17 @@
 
 ## Summary
 
-[WebAssembly (abbreviated Wasm)][1] is a binary instruction format for a stack-based
-virtual machine. The main goal is to enable high-performance applications on web
-pages, "but it does not make any Web-specific assumptions or provide
-Web-specific features, so it can be employed in other environments as well." It
-is an open standard and aims to support any language on any operating system,
-and in practice all of the most popular languages already have at least some
-level of support.
+[WebAssembly (abbreviated Wasm)][1] is a binary instruction format for a
+stack-based virtual machine. The main goal is to enable high-performance
+applications on web pages, "but it does not make any Web-specific assumptions or
+provide Web-specific features, so it can be employed in other environments as
+well." It is an open standard and aims to support any language on any operating
+system, and in practice all of the most popular languages already have at least
+some level of support.
+
+> "WebAssembly, that defines a portable, size- and load-time-efficient format
+and execution model specifically designed to serve as a compilation target for
+the Web." - [Luke Wagner][4]
 
 WasmEdge is a lightweight, high-performance, and extensible WebAssembly runtime
 for cloud native, edge, and decentralized applications.
@@ -57,3 +61,4 @@ deployment on it.
 [1]: https://webassembly.org/
 [2]: https://www.vagrantup.com/
 [3]: https://github.com/electrocucaracha/bootstrap-vagrant
+[4]: https://blog.mozilla.org/luke/2015/06/17/webassembly/
