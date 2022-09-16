@@ -1,4 +1,5 @@
 blockquote
+brightgreen
 electrocucaracha
 fsSL
 href
@@ -12,6 +13,7 @@ ly
 opensource
 pre
 req
+rubocop
 runtime
 src
 svg

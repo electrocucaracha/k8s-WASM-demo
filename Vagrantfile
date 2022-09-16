@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 ##############################################################################
@@ -24,17 +26,19 @@ when /mswin|mingw|cygwin/
   mem = `wmic computersystem Get TotalPhysicalMemory`.split[1].to_i / 1024
 end
 
-Vagrant.configure("2") do |config|
+# rubocop:disable Metrics/BlockLength
+Vagrant.configure('2') do |config|
+  # rubocop:enable Metrics/BlockLength
   config.vm.provider :libvirt
   config.vm.provider :virtualbox
 
-  config.vm.box = "generic/ubuntu2004"
+  config.vm.box = 'generic/ubuntu2004'
   config.vm.box_check_update = false
   config.vm.synced_folder './', '/vagrant'
 
-  config.vm.provision "shell", privileged: false do |sh|
+  config.vm.provision 'shell', privileged: false do |sh|
     sh.env = {
-      RUNTIME_MANAGER: ENV["RUNTIME_MANAGER"]
+      RUNTIME_MANAGER: ENV['RUNTIME_MANAGER']
     }
     sh.inline = <<-SHELL
       set -o errexit
@@ -54,18 +58,18 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.provider "virtualbox" do |v|
+  config.vm.provider 'virtualbox' do |v|
     v.gui = false
-    v.customize ["modifyvm", :id, "--nictype1", "virtio", "--cableconnected1", "on"]
+    v.customize ['modifyvm', :id, '--nictype1', 'virtio', '--cableconnected1', 'on']
     # https://bugs.launchpad.net/cloud-images/+bug/1829625/comments/2
-    v.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
-    v.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
+    v.customize ['modifyvm', :id, '--uart1', '0x3F8', '4']
+    v.customize ['modifyvm', :id, '--uartmode1', 'file', File::NULL]
     # Enable nested paging for memory management in hardware
-    v.customize ["modifyvm", :id, "--nestedpaging", "on"]
+    v.customize ['modifyvm', :id, '--nestedpaging', 'on']
     # Use large pages to reduce Translation Lookaside Buffers usage
-    v.customize ["modifyvm", :id, "--largepages", "on"]
+    v.customize ['modifyvm', :id, '--largepages', 'on']
     # Use virtual processor identifiers  to accelerate context switching
-    v.customize ["modifyvm", :id, "--vtxvpid", "on"]
+    v.customize ['modifyvm', :id, '--vtxvpid', 'on']
   end
 
   config.vm.provider :libvirt do |v, override|
@@ -77,12 +81,10 @@ Vagrant.configure("2") do |config|
     v.cpu_mode = 'host-passthrough'
   end
 
-  if ENV['http_proxy'] != nil and ENV['https_proxy'] != nil
-    if Vagrant.has_plugin?('vagrant-proxyconf')
-      config.proxy.http     = ENV['http_proxy'] || ENV['HTTP_PROXY'] || ""
-      config.proxy.https    = ENV['https_proxy'] || ENV['HTTPS_PROXY'] || ""
-      config.proxy.no_proxy = no_proxy
-      config.proxy.enabled = { docker: false }
-    end
+  if !ENV['http_proxy'].nil? && !ENV['https_proxy'].nil? && Vagrant.has_plugin?('vagrant-proxyconf')
+    config.proxy.http = ENV['http_proxy'] || ENV['HTTP_PROXY'] || ''
+    config.proxy.https    = ENV['https_proxy'] || ENV['HTTPS_PROXY'] || ''
+    config.proxy.no_proxy = no_proxy
+    config.proxy.enabled = { docker: false }
   end
 end
