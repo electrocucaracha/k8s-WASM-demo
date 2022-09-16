@@ -11,7 +11,7 @@
 set -o pipefail
 set -o errexit
 set -o nounset
-if [[ "${DEBUG:-false}" == "true" ]]; then
+if [[ ${DEBUG:-false} == "true" ]]; then
     set -o xtrace
 fi
 # get_status() - Print the current status of the cluster
@@ -56,12 +56,12 @@ function run_test {
     kubectl apply -f "$scenario-test.yml"
     sleep 30
     pods=$(kubectl get pods --selector=job-name="$scenario-traffic-generator" --output=jsonpath='{.items[*].metadata.name}')
-    until kubectl logs "$pods" | grep -q "http_req_connecting" ; do
-        if [ ${attempt_counter} -eq ${max_attempts} ];then
+    until kubectl logs "$pods" | grep -q "http_req_connecting"; do
+        if [ ${attempt_counter} -eq ${max_attempts} ]; then
             error "Max attempts reached"
         fi
-        attempt_counter=$((attempt_counter+1))
-        sleep $((attempt_counter*1))
+        attempt_counter=$((attempt_counter + 1))
+        sleep $((attempt_counter * 1))
     done
 
     kubectl logs --selector=job-name="$scenario-traffic-generator" --tail=21 | grep http_req

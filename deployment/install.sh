@@ -11,7 +11,7 @@
 set -o pipefail
 set -o errexit
 set -o nounset
-if [[ "${DEBUG:-false}" == "true" ]]; then
+if [[ ${DEBUG:-false} == "true" ]]; then
     set -o xtrace
     export PKG_DEBUG=true
 fi

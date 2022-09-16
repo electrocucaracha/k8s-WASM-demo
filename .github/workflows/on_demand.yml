@@ -14,6 +14,18 @@ on:
   push:
 
 jobs:
+  check-format:
+    name: Check scripts format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run the sh-checker
+        uses: luizm/action-sh-checker@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHFMT_OPTS: -i 4 -s
+        with:
+          sh_checker_shellcheck_disable: true
   check-containerd:
     name: Check demo for Containerd runtime on Ubuntu Virtual Environment
     runs-on: ubuntu-20.04
