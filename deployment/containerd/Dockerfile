@@ -6,21 +6,21 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y --no-install-recommends \
     ca-certificates=20211016 \
-    curl=7.81.0-1ubuntu1.4 \
+    curl=7.81.0-1ubuntu1.6 \
     make=4.3-4.1build1 \
-    git=1:2.34.1-1ubuntu1.4 \
+    git=1:2.34.1-1ubuntu1.5 \
     gcc=4:11.2.0-1ubuntu1 \
     build-essential=12.9ubuntu3 \
     pkgconf=1.8.0-1 \
     libtool=2.4.6-15build2 \
-    libsystemd-dev=249.11-0ubuntu3.4 \
+    libsystemd-dev=249.11-0ubuntu3.6 \
     libprotobuf-c-dev=1.3.3-1ubuntu2.1 \
     libcap-dev=1:2.44-1build3 \
     libseccomp-dev=2.5.3-2ubuntu2 \
     libyajl-dev=2.1.0-3build2 \
     go-md2man=2.0.1+ds1-1 \
     autoconf=2.71-2 \
-    python3=3.10.4-0ubuntu2 \
+    python3=3.10.6-1~22.04 \
     automake=1:1.16.5-1.3 && \
     apt-get clean -y && \
     rm -rf \
