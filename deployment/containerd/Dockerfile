@@ -6,7 +6,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y --no-install-recommends \
     ca-certificates=20211016 \
-    curl=7.81.0-1ubuntu1.6 \
+    curl=7.81.0-1ubuntu1.7 \
     make=4.3-4.1build1 \
     git=1:2.34.1-1ubuntu1.5 \
     gcc=4:11.2.0-1ubuntu1 \
