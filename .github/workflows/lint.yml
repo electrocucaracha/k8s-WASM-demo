@@ -31,6 +31,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LINTER_RULES_PATH: /
+          KUBERNETES_KUBECONFORM_OPTIONS: '-skip kind.x-k8s.io/v1alpha4/Cluster'
           VALIDATE_KUBERNETES_KUBEVAL: false
           VALIDATE_RUST_CLIPPY: false
   check-tox:

@@ -14,6 +14,7 @@ lint:
 	sudo -E $(DOCKER_CMD) run --rm -v $$(pwd):/tmp/lint \
 	-e RUN_LOCAL=true \
 	-e LINTER_RULES_PATH=/ \
+	-e KUBERNETES_KUBECONFORM_OPTIONS='-skip kind.x-k8s.io/v1alpha4/Cluster' \
 	-e VALIDATE_KUBERNETES_KUBEVAL=false \
 	-e VALIDATE_RUST_CLIPPY=false \
 	github/super-linter
