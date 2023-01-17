@@ -18,9 +18,9 @@ jobs:
     name: Check scripts format
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.3.0
       - name: Run the sh-checker
-        uses: luizm/action-sh-checker@master
+        uses: luizm/action-sh-checker@v0.5.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SHFMT_OPTS: -i 4 -s
@@ -30,10 +30,12 @@ jobs:
     name: Check demo for Containerd runtime on Ubuntu Virtual Environment
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.3.0
       - name: Install dependencies
         run: deployment/install.sh
       - name: Configure environment
-        run: cd deployment/; ./configure.sh
+        working-directory: ./deployment
+        run: ./configure.sh
       - name: Running demo
-        run: cd deployment/; ./demo.sh
+        working-directory: ./deployment
+        run: ./demo.sh
