@@ -25,7 +25,7 @@ jobs:
           sh_checker_shellcheck_disable: true
   check-containerd:
     name: Check demo for Containerd runtime on Ubuntu Virtual Environment
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
       - name: Install dependencies
