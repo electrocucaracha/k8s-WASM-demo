@@ -4,22 +4,22 @@ FROM kindest/node:v${version} as builder
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN DEBIAN_FRONTEND=noninteractive clean-install \
-    ca-certificates=20211016 \
-    curl=7.81.0-1ubuntu1.7 \
-    make=4.3-4.1build1 \
-    git=1:2.34.1-1ubuntu1.5 \
-    gcc=4:11.2.0-1ubuntu1 \
-    build-essential=12.9ubuntu3 \
-    pkgconf=1.8.0-1 \
-    libtool=2.4.6-15build2 \
-    libsystemd-dev=249.11-0ubuntu3.6 \
-    libprotobuf-c-dev=1.3.3-1ubuntu2.1 \
-    libcap-dev=1:2.44-1build3 \
-    libseccomp-dev=2.5.3-2ubuntu2 \
-    libyajl-dev=2.1.0-3build2 \
-    go-md2man=2.0.1+ds1-1 \
-    autoconf=2.71-2 \
-    python3=3.10.6-1~22.04 \
+    ca-certificates=20230311+deb12u1 \
+    curl=7.88.1-10+deb12u12 \
+    make=4.3-4.1 \
+    git=1:2.39.5-0+deb12u2 \
+    gcc=4:12.2.0-3 \
+    build-essential=12.9 \
+    pkgconf=1.8.1-1 \
+    libtool=2.4.7-7~deb12u1 \
+    libsystemd-dev=252.38-1~deb12u1 \
+    libprotobuf-c-dev=1.4.1-1+b1 \
+    libcap-dev=1:2.66-4+deb12u1 \
+    libseccomp-dev=2.5.4-1+deb12u1 \
+    libyajl-dev=2.1.0-3+deb12u2 \
+    go-md2man=2.0.2+ds1-1 \
+    autoconf=2.71-3 \
+    python3=3.11.2-1+b1 \
     automake=1:1.16.5-1.3
 
 # install wasmedge headers (https://wasmedge.org/book/en/start/install.html#install-for-all-users)
