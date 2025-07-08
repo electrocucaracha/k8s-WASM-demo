@@ -1,5 +1,7 @@
 # Kubernetes Wasm Demo
+
 <!-- markdown-link-check-disable-next-line -->
+
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
 ![visitors](https://visitor-badge.glitch.me/badge?page_id=electrocucaracha.k8s-WASM-demo)
@@ -15,8 +17,8 @@ system, and in practice all of the most popular languages already have at least
 some level of support.
 
 > "WebAssembly, that defines a portable, size- and load-time-efficient format
-and execution model specifically designed to serve as a compilation target for
-the Web." - [Luke Wagner][4]
+> and execution model specifically designed to serve as a compilation target for
+> the Web." - [Luke Wagner][4]
 
 WasmEdge is a lightweight, high-performance, and extensible WebAssembly runtime
 for cloud native, edge, and decentralized applications.
@@ -29,8 +31,8 @@ WasmEdge runtime in Kubernetes.
 The following table shows the sample taken from the 95 percentile values of a
 single execution, those values can vary.
 
-| Metric Name         | Description                                                                                | Rust    | Wasm     |
-|:--------------------|:-------------------------------------------------------------------------------------------|:-------:|:--------:|
+| Metric Name         | Description                                                                                |  Rust   |   Wasm   |
+| :------------------ | :----------------------------------------------------------------------------------------- | :-----: | :------: |
 | http_req_blocked    | Time spent blocked (waiting for a free TCP connection slot) before initiating the request. | 5.18ms  | 460.62µs |
 | http_req_connecting | Time spent establishing TCP connection to the remote host.                                 | 5.13ms  | 387.23µs |
 | http_req_receiving  | Time spent receiving response data from the remote host.                                   | 6.36ms  | 413.08µs |
@@ -42,7 +44,7 @@ single execution, those values can vary.
 ## Virtual Machines
 
 The [Vagrant tool][2] can be used for provisioning an Ubuntu Focal
-Virtual Machine. It's highly recommended to use the  *setup.sh* script
+Virtual Machine. It's highly recommended to use the _setup.sh_ script
 of the [bootstrap-vagrant project][3] for installing Vagrant
 dependencies and plugins required for this project. That script
 supports two Virtualization providers (Libvirt and VirtualBox) which

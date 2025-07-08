@@ -17,10 +17,14 @@ lint:
 	-e KUBERNETES_KUBECONFORM_OPTIONS='-skip kind.x-k8s.io/v1alpha4/Cluster' \
 	-e VALIDATE_KUBERNETES_KUBEVAL=false \
 	-e VALIDATE_RUST_CLIPPY=false \
-	github/super-linter
+	ghcr.io/super-linter/super-linter
 	tox -e lint
 
 .PHONY: fmt
 fmt:
-	sudo -E $(DOCKER_CMD) run --rm -u "$$(id -u):$$(id -g)" \
-	-v "$$(pwd):/mnt" -w /mnt mvdan/shfmt -l -w -i 4 -s .
+	command -v shfmt > /dev/null || curl -s "https://i.jpillora.com/mvdan/sh!!?as=shfmt" | bash
+	shfmt -l -w -s  -i 4 .
+	command -v yamlfmt > /dev/null || curl -s "https://i.jpillora.com/google/yamlfmt!!" | bash
+	yamlfmt -dstar **/*.{yaml,yml}
+	command -v prettier > /dev/null || npm install prettier
+	npx prettier . --write
