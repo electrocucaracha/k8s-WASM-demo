@@ -32,11 +32,11 @@ single test run. These values may vary with each execution:
 
 | Metric Name         | Description                                                                         |  Rust   |   Wasm   |
 | :------------------ | :---------------------------------------------------------------------------------- | :-----: | :------: |
-| http_req_blocked    | Time spent waiting for an available TCP connection before making the request.       | 5.18ms  | 460.62µs |
-| http_req_connecting | Time spent establishing a TCP connection to the remote host.                        | 5.13ms  | 387.23µs |
-| http_req_receiving  | Time spent receiving data from the remote host.                                     | 6.36ms  | 413.08µs |
-| http_req_sending    | Time spent sending data to the remote host.                                         | 2.86ms  | 246.45µs |
-| http_req_waiting    | Time spent waiting for the response (also known as "time to first byte" or "TTFB"). | 28.56ms | 69.13ms  |
+| http_req_blocked    | Time spent waiting for an available TCP connection before making the request.       | 14.06ms |  3.55ms  |
+| http_req_connecting | Time spent establishing a TCP connection to the remote host.                        | 13.79ms |  3.16ms  |
+| http_req_receiving  | Time spent receiving data from the remote host.                                     | 16.04ms |  2.39ms  |
+| http_req_sending    | Time spent sending data to the remote host.                                         | 7.14ms  |  1.57ms  |
+| http_req_waiting    | Time spent waiting for the response (also known as "time to first byte" or "TTFB"). | 34.92ms | 126.93ms |
 
 > Note: Surprisingly, the response waiting time in the Wasm version is longer than in Rust.
 
