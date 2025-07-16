@@ -16,7 +16,7 @@ if [[ ${DEBUG:-false} == "true" ]]; then
     export PKG_DEBUG=true
 fi
 
-export PKG_KREW_PLUGINS_LIST=" "
+export PKG_KREW_PLUGINS_LIST="envsubst"
 
 # Install dependencies
 # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts

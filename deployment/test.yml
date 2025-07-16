@@ -22,7 +22,7 @@ data:
     };
 
     export default function() {
-      let res = http.get("http://wasm-service.default.svc.cluster.local:1234");
+      let res = http.get("http://${scenario}-service.default.svc.cluster.local:1234");
       check(res, {
         "status was 200": (r) => r.status == 200,
         "transaction time OK": (r) => r.timings.duration < 200
@@ -32,7 +32,7 @@ data:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: wasm-traffic-generator
+  name: traffic-generator
 spec:
   template:
     spec:
