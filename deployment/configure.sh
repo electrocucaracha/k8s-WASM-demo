@@ -88,6 +88,7 @@ for node in $(kubectl get node -o jsonpath='{range .items[*]}{.metadata.name}{"\
     kubectl wait --for=condition=ready "node/$node" --timeout=3m
 done
 
+# editorconfig-checker-disable
 cat <<EOF | kubectl apply -f -
 apiVersion: node.k8s.io/v1
 kind: RuntimeClass
@@ -95,3 +96,4 @@ metadata:
   name: crun
 handler: crun
 EOF
+# editorconfig-checker-enable
