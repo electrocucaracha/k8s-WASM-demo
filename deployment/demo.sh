@@ -49,13 +49,13 @@ function run_test {
     attempt_counter=0
     max_attempts=6
 
+    export scenario
     info "Running $scenario test"
 
-    # shellcheck disable=SC2064
-    trap "kubectl delete --ignore-not-found -f $scenario-test.yml --wait" RETURN
-    kubectl apply -f "$scenario-test.yml"
+    trap "kubectl delete --ignore-not-found -f test.yml --wait" RETURN
+    envsubst < <(cat test.yml) | kubectl apply -f -
     sleep 30
-    pods=$(kubectl get pods --selector=job-name="$scenario-traffic-generator" --output=jsonpath='{.items[*].metadata.name}')
+    pods=$(kubectl get pods --selector=job-name=traffic-generator --output=jsonpath='{.items[*].metadata.name}')
     until kubectl logs "$pods" | grep -q "http_req_connecting"; do
         if [ ${attempt_counter} -eq ${max_attempts} ]; then
             error "Max attempts reached"
@@ -64,7 +64,7 @@ function run_test {
         sleep $((attempt_counter * 1))
     done
 
-    kubectl logs --selector=job-name="$scenario-traffic-generator" --tail=21 | grep http_req
+    kubectl logs --selector=job-name=traffic-generator --tail=21 | grep http_req
 }
 
 function cleanup {
