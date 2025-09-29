@@ -15,8 +15,12 @@ jobs:
   check-format:
     name: Check scripts format
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+        with:
+          persist-credentials: false
       - name: Run the sh-checker
         uses: luizm/action-sh-checker@17bd25a6ee188d2b91f677060038f4ba37ba14b2 # 0.9.0
         env:
@@ -27,8 +31,12 @@ jobs:
   check-containerd:
     name: Check demo for Containerd runtime on Ubuntu Virtual Environment
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+        with:
+          persist-credentials: false
       - name: Install dependencies
         run: deployment/install.sh
       - name: Configure environment

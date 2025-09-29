@@ -16,14 +16,22 @@ on:
 jobs:
   check-broken-links:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+        with:
+          persist-credentials: false
       - name: Check broken links
         uses: gaurav-nelson/github-action-markdown-link-check@4a1af151f4d7cf4d8f8ac5780597672a3671b88b # 1.0.17
   check-super-linter:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+        with:
+          persist-credentials: false
       - name: Check super-linter
         uses: super-linter/super-linter@ffde3b2b33b745cb612d787f669ef9442b1339a6 # 8.1.0
         env:
@@ -33,10 +41,15 @@ jobs:
           VALIDATE_KUBERNETES_KUBEVAL: false
           VALIDATE_RUST_CLIPPY: false
           VALIDATE_CHECKOV: false
+          DEFAULT_BRANCH: ${{ github.head_ref || github.ref_name }}
   check-tox:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+        with:
+          persist-credentials: false
       - name: Install tox
         run: pip install tox
       - name: Run tox validation

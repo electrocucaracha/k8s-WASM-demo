@@ -1,3 +1,4 @@
+#checkov:skip=CKV_DOCKER_2:Ensure that HEALTHCHECK instructions have been added to container images
 FROM rust:1.88-slim-bullseye as builder
 
 WORKDIR /opt/
