@@ -7,6 +7,7 @@ https
 img
 initVagrant
 Kubernetes
+laobi
 libvirt
 Libvirt
 ly
@@ -21,6 +22,7 @@ TCP
 TTFB
 vagrantup
 VirtualBox
+VM
 WASM
 WasmEdge
 WebAssembly
