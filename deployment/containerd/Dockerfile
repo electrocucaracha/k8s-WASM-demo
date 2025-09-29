@@ -1,28 +1,19 @@
 #checkov:skip=CKV_DOCKER_2:Ensure that HEALTHCHECK instructions have been added to container images
 ARG version
 
-FROM ubuntu:22.04 as builder
+FROM wasmedge/wasmedge as builder
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y --no-install-recommends \
-    ca-certificates=20211016 \
-    curl=7.81.0-1ubuntu1.20 \
-    make=4.3-4.1build1 \
-    git=1:2.34.1-1ubuntu1.15 \
-    gcc=4:11.2.0-1ubuntu1 \
-    build-essential=12.9ubuntu3 \
-    pkgconf=1.8.0-1 \
-    libtool=2.4.6-15build2 \
-    libsystemd-dev=249.11-0ubuntu3.16 \
-    libprotobuf-c-dev=1.3.3-1ubuntu2.1 \
-    libcap-dev=1:2.44-1ubuntu0.22.04.2 \
-    libseccomp-dev=2.5.3-2ubuntu3~22.04.1 \
-    libyajl-dev=2.1.0-3ubuntu0.22.04.1 \
-    go-md2man=2.0.1+ds1-1 \
-    autoconf=2.71-2 \
-    python3=3.10.6-1~22.04.1 \
-    automake=1:1.16.5-1.3 && \
+    pkgconf=1.8.1-2build1 \
+    autoconf=2.71-3 \
+    libtool=2.4.7-7build1 \
+    libyajl-dev=2.1.0-5build1 \
+    libcap-dev=1:2.66-5ubuntu2.2 \
+    libseccomp-dev=2.5.5-1ubuntu3.1 \
+    libsystemd-dev=255.4-1ubuntu8.10 \
+    automake=1:1.16.5-1.3ubuntu1 && \
     apt-get clean -y && \
     rm -rf \
     /var/cache/debconf/* \
@@ -35,12 +26,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     /usr/share/man/* \
     /usr/share/local/*
 
-RUN curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash -s -- --path=/usr/local/ --version=0.14.1 \
+RUN curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash -s -- --path=/usr/local/ --version=0.15.0 \
     && git clone https://github.com/containers/crun /opt/crun
 
 # build crun with --with-wasmedge flag (https://wasmedge.org/docs/develop/deploy/oci-runtime/crun/)
 WORKDIR /opt/crun
-RUN git checkout tags/1.22 -b wasm \
+RUN git checkout tags/1.24 -b wasm \
     && ./autogen.sh \
     && ./configure --with-wasmedge --enable-embedded-yajl \
     && make
