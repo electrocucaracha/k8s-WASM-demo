@@ -23,7 +23,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Check broken links
-        uses: gaurav-nelson/github-action-markdown-link-check@4a1af151f4d7cf4d8f8ac5780597672a3671b88b # 1.0.17
+        uses: tcort/github-action-markdown-link-check@f3d33029dca1c4a24b87e2df648f9f4604ef6533 # 1.1.1
   check-super-linter:
     runs-on: ubuntu-latest
     permissions:
