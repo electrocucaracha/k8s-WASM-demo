@@ -1,7 +1,7 @@
 #checkov:skip=CKV_DOCKER_2:Ensure that HEALTHCHECK instructions have been added to container images
 ARG version
 
-FROM wasmedge/wasmedge as builder
+FROM wasmedge/wasmedge:ubuntu-build-clang as builder
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
@@ -12,7 +12,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     libyajl-dev=2.1.0-5build1 \
     libcap-dev=1:2.66-5ubuntu2.2 \
     libseccomp-dev=2.5.5-1ubuntu3.1 \
-    libsystemd-dev=255.4-1ubuntu8.10 \
+    libsystemd-dev=255.4-1ubuntu8.11 \
     automake=1:1.16.5-1.3ubuntu1 && \
     apt-get clean -y && \
     rm -rf \
