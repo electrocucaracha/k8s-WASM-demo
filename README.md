@@ -58,6 +58,6 @@ Once Vagrant is set up, you can provision the virtual machine using:
 This process may take a while, as it installs all dependencies and deploys Kubernetes within the VM.
 
 [1]: https://webassembly.org/
-[2]: https://www.vagrantup.com/
+[2]: https://developer.hashicorp.com/vagrant
 [3]: https://github.com/electrocucaracha/bootstrap-vagrant
 [4]: https://blog.mozilla.org/luke/2015/06/17/webassembly/
