@@ -2,3 +2,5 @@
 *.log
 *.dic
 target/
+node_modules/
+package*

@@ -18,6 +18,7 @@ lint:
 	-e VALIDATE_KUBERNETES_KUBEVAL=false \
 	-e VALIDATE_RUST_CLIPPY=false \
 	-e VALIDATE_CHECKOV=false \
+	-e VALIDATE_BIOME_FORMAT=false \
 	ghcr.io/super-linter/super-linter
 	tox -e lint
 
