@@ -33,7 +33,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Check super-linter
-        uses: super-linter/super-linter@7bba2eeb89d01dc9bfd93c497477a57e72c83240 # 8.2.0
+        uses: super-linter/super-linter@2bdd90ed3262e023ac84bf8fe35dc480721fc1f2 # 8.2.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LINTER_RULES_PATH: /
